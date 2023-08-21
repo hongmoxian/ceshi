@@ -1,0 +1,205 @@
+   { 
+    "type_map":		["O", "H"],
+    "mass_map":		[16, 1.0],
+    "init_data_prefix":	"/public1/home/sch2987/zihong/dpmd/gongzuoliu/data",
+    "init_data_sys":	[["neu"], ["red"]], 
+   "init_batch_size":	[1,1],
+    "sys_configs":	[
+	["/public1/home/sch2987/zihong/dpmd/data/md.init/1o-o2/0.POSCAR"],
+     ["/public1/home/sch2987/zihong/dpmd/data/md.init/1o-o2/10.POSCAR"],
+["/public1/home/sch2987/zihong/dpmd/data/md.init/1o-o2/50.POSCAR"],
+["/public1/home/sch2987/zihong/dpmd/data/md.init/1o-o2/1[0-1].POSCAR"],
+["/public1/home/sch2987/zihong/dpmd/data/md.init/1o-o2/2[0-1].POSCAR"],
+["/public1/home/sch2987/zihong/dpmd/data/md.init/1o-o2/3[0-1].POSCAR"],
+["/public1/home/sch2987/zihong/dpmd/data/md.init/1o-o2/4[0-1].POSCAR"],
+["/public1/home/sch2987/zihong/dpmd/data/md.init/1o-o2/50.POSCAR"],
+        ["/public1/home/sch2987/zihong/dpmd/data/md.init/O2/1/POSCAR"],
+        ["/public1/home/sch2987/zihong/dpmd/data/md.init/Ti64O128/1/POSCAR"],
+	["/public1/home/sch2987/zihong/dpmd/data/md.init/2o/shuju/3[1-2]/POSCAR"],
+	["/public1/home/sch2987/zihong/dpmd/data/md.init/3o/shuju/2[1-2]/POSCAR"],
+	["/public1/home/sch2987/zihong/dpmd/data/md.init/4o/shuju/3[1-2]/POSCAR"],
+	["/public1/home/sch2987/zihong/dpmd/data/md.init/5o/shuju/3[1-2]/POSCAR"],
+	["/public1/home/sch2987/zihong/dpmd/data/md.init/6o/shuju/2[1-2]/POSCAR"]
+	],
+	  "_comment":		"0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15",
+    "sys_batch_size":	[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    "numb_models":	4,
+    "train_param":	"input.json",
+    "dp_compress":      "true",
+    "default_training_param" : {
+	"_comment": " model parameters",
+	"model": {
+	    "type_map":     ["O", "H"],	    
+	    "descriptor" :{		
+		"type":		"se_e2_a",
+		"sel":		[96, 48],
+		"rcut_smth":	1.0,
+		"rcut":		6.00,
+		"neuron":	[25, 50, 100],
+		"axis_neuron":	16,
+		"seed":		1,
+		"_comment":	" that's all"		
+	    },
+	    "fitting_net" :{
+		"neuron":	[120, 120, 120],
+		"resnet_dt":	false,
+                "atom_ener":[-434.008,-1593.5],
+         	"seed":		1,
+		"_comment":	" that's all"		
+	    },
+	    "_comment":	" that's all"		
+	},
+         "learning_rate": {
+             "start_lr": 0.001,
+            "decay_steps": 4800,
+	    "decay_rate":	0.92
+  },
+	    "_comment":	" that's all"		
+	,
+	"loss" :{
+	    "start_pref_e":	0.01,
+	    "limit_pref_e":	1,
+	    "start_pref_f":	1000,
+	    "limit_pref_f":	2,
+	    "start_pref_v":	0.0,
+	    "limit_pref_v":	0.0,
+	    "_comment":	" that's all"		
+	}
+,
+	"training" : {
+	    "systems":		[],
+	    "set_prefix":	"set",    
+	    "stop_batch":	600000,
+	    "batch_size":	"1",
+	    "_comment": " display and restart",
+	    "disp_file":	"lcurve.out",
+	    "disp_freq":	500,
+	    "numb_test":	5,
+	    "save_freq":	5000,
+	    "save_ckpt":	"model.ckpt",
+	    "disp_training":	true,
+	    "time_training":	true,
+	    "profiling":	false,
+	    "profiling_file":	"timeline.json"
+	}},
+    "model_devi_plumed":  false,
+    "model_devi_dt":		0.001,
+    "model_devi_skip":		0,
+    "model_devi_f_trust_lo":	0.15,
+    "model_devi_f_trust_hi":	0.35,
+    "model_devi_e_trust_lo":	1e10,
+    "model_devi_e_trust_hi":	1e10,
+    "model_devi_clean_traj":	true,
+    "model_devi_jobs":	[
+        { "sys_idx": [0],"traj_freq": 100,"_idx": "00",
+            "template":{ "lmp": "lmp/input.lammps", "plm": "lmp/input.plumed" },
+            "rev_mat":{ "lmp": {"V_NSTEPS": [200000], "V_TEMP": [330], "V_PRES": [1]},
+                        "plm": {"V_TEMP":  [330], "V_STRIDE": [100]}}},
+{ "sys_idx": [0],"traj_freq": 100,"_idx": "00",
+            "template":{ "lmp": "lmp/input.lammps", "plm": "lmp/input.plumed" },
+            "rev_mat":{ "lmp": {"V_NSTEPS": [500000], "V_TEMP": [330], "V_PRES": [1]},
+                        "plm": {"V_TEMP":  [330], "V_STRIDE": [100]}}},
+     { "sys_idx": [0],"traj_freq": 100,"_idx": "00",
+            "template":{ "lmp": "lmp/input.lammps", "plm": "lmp/input.plumed" },
+            "rev_mat":{ "lmp": {"V_NSTEPS": [600000], "V_TEMP": [330], "V_PRES": [1]},
+                        "plm": {"V_TEMP":  [330], "V_STRIDE": [100]}}},
+      { "sys_idx": [0,4],"traj_freq": 100,"_idx": "00",
+            "template":{ "lmp": "lmp/input.lammps", "plm": "lmp/input.plumed" },
+            "rev_mat":{ "lmp": {"V_NSTEPS": [600000], "V_TEMP": [330], "V_PRES": [1]},
+                        "plm": {"V_TEMP":  [330], "V_STRIDE": [100]}}},
+     {"sys_idx":[1,2,3,4,5], "Ts": [330,500,700], "Ps": [1], "t_freq": 100, "nsteps":  100000,  "ens": "nvt", "_idx": "00"},
+ {"sys_idx":[1], "Ts": [330,500,700], "Ps": [1], "t_freq": 100, "nsteps":  100000,  "ens": "nvt", "_idx": "00"},
+{"sys_idx":[0], "Ts": [150,300,500], "Ps": [1], "t_freq": 100, "nsteps":  100000,  "ens": "nvt", "_idx": "00"},
+{"sys_idx":[0], "Ts": [150,300,500], "Ps": [1], "t_freq": 100, "nsteps":  100000,  "ens": "nvt", "_idx": "00"},
+{"sys_idx":[0], "Ts": [300], "Ps": [1], "t_freq": 100, "nsteps":  500000,  "ens": "nvt", "_idx": "00"},
+     { "sys_idx": [0],"traj_freq": 100,"_idx": "00",
+            "template":{ "lmp": "lmp/input.lammps", "plm": "lmp/input.plumed" },
+            "rev_mat":{ "lmp": {"V_NSTEPS": [100000], "V_TEMP": [300], "V_PRES": [1]},
+                        "plm": {"V_TEMP":  [300], "V_STRIDE": [100]}}},
+     { "sys_idx": [0],"traj_freq": 100,"_idx": "00",
+            "template":{ "lmp": "lmp/input.lammps", "plm": "lmp/input.plumed" },
+            "rev_mat":{ "lmp": {"V_NSTEPS": [300000], "V_TEMP": [300], "V_PRES": [1]},
+                        "plm": {"V_TEMP":  [300], "V_STRIDE": [100]}}},
+     { "sys_idx": [0],"traj_freq": 100,"_idx": "00",
+            "template":{ "lmp": "lmp/input.lammps", "plm": "lmp/input.plumed" },
+            "rev_mat":{ "lmp": {"V_NSTEPS": [500000], "V_TEMP": [300], "V_PRES": [1]},
+                        "plm": {"V_TEMP":  [300], "V_STRIDE": [100]}}},
+     { "sys_idx": [0],"traj_freq": 100,"_idx": "00",
+            "template":{ "lmp": "lmp/input.lammps", "plm": "lmp/input.plumed" },
+            "rev_mat":{ "lmp": {"V_NSTEPS": [1000000], "V_TEMP": [300], "V_PRES": [1]},
+                        "plm": {"V_TEMP":  [300,500,150], "V_STRIDE": [100]}}},
+     {"sys_idx":[0], "Ts": [150,300,500], "Ps": [1], "t_freq": 100, "nsteps":  100000,  "ens": "nvt", "_idx": "00"},
+    { "sys_idx": [0],"traj_freq": 100,"_idx": "00",
+            "template":{ "lmp": "lmp/input.lammps", "plm": "lmp/input.plumed" },
+            "rev_mat":{ "lmp": {"V_NSTEPS": [1000000], "V_TEMP": [300], "V_PRES": [1]},
+                        "plm": {"V_TEMP":  [300], "V_STRIDE": [100]}}},
+    { "sys_idx": [0],"traj_freq": 100,"_idx": "00",
+            "template":{ "lmp": "lmp/input.lammps", "plm": "lmp/input.plumed" },
+            "rev_mat":{ "lmp": {"V_NSTEPS": [1000000], "V_TEMP": [300], "V_PRES": [1]},
+                        "plm": {"V_TEMP":  [300], "V_STRIDE": [100]}}},
+    { "sys_idx": [0],"traj_freq": 100,"_idx": "00",
+            "template":{ "lmp": "lmp/input.lammps", "plm": "lmp/input.plumed" },
+            "rev_mat":{ "lmp": {"V_NSTEPS": [1000000], "V_TEMP": [300], "V_PRES": [1]},
+                        "plm": {"V_TEMP":  [300], "V_STRIDE": [100]}}},
+	{"sys_idx":[0,1,2], "Ts": [300], "Ps": [1], "t_freq": 100, "nsteps":  500000,  "ens": "nvt", "_idx": "00"},
+        { "sys_idx": [0,1,2],"traj_freq": 100,"_idx": "00",
+            "template":{ "lmp": "lmp/input.lammps", "plm": "lmp/input.plumed" },
+            "rev_mat":{ "lmp": {"V_NSTEPS": [1000000], "V_TEMP": [300], "V_PRES": [1]},
+                        "plm": {"V_TEMP":  [300], "V_STRIDE": [100]}}},
+        {"sys_idx":[1], "Ts": [330,400,500], "Ps": [1],"t_freq": 100, "nsteps":  100000,  "ens": "nvt", "_idx": "01"},
+        {"sys_idx":[0,1,2,3,4,5], "Ts": [800], "Ps": [1], "t_freq": 100, "nsteps": 50000,  "ens": "nvt", "_idx": "02"},
+	{"sys_idx":[0,1,2,3,4,5], "Ts": [800], "Ps": [1], "t_freq": 100, "nsteps":100000,  "ens": "nvt", "_idx": "03"},
+ {"sys_idx":[0,1,2,3,4,5], "Ts": [330], "Ps": [1], "t_freq": 100, "nsteps":200000,  "ens": "nvt", "_idx": "03"},
+{"sys_idx":[0,1,2,3,4,5], "Ts": [330,500], "Ps": [1], "t_freq": 100, "nsteps":100000,  "ens": "nvt", "_idx": "04"},
+ {"sys_idx":[1], "Ts": [330,500], "Ps": [1], "t_freq": 100, "nsteps":20000,  "ens": "nvt", "_idx": "04"},
+ {"sys_idx":[0,1,2,3,4,5], "Ts": [330,500], "Ps": [1], "t_freq": 100, "nsteps":100000,  "ens": "nvt", "_idx": "04"}
+            ],
+     "fp_style": "cp2k", 
+    "shuffle_poscar": false, 
+    "fp_task_max": 300, 
+    "fp_task_min": 5, 
+    "fp_pp_path": ".", 
+    "fp_pp_files": [], 
+    "user_fp_params":  {
+      "FORCE_EVAL":{
+	"STRESS_TENSOR":"NONE",
+            "DFT":{
+                "BASIS_SET_FILE_NAME":  "/public1/home/sch2987/zihong/cp2k/potential/BASIS_SET",
+                "POTENTIAL_FILE_NAME": "/public1/home/sch2987/zihong/cp2k/potential/GTH_POTENTIALS",
+            "DFT":{
+                "BASIS_SET_FILE_NAME":  "/public1/home/sch2987/zihong/cp2k/potential/BASIS_SET",
+                "POTENTIAL_FILE_NAME": "/public1/home/sch2987/zihong/cp2k/potential/GTH_POTENTIALS",
+                "MGRID":{
+                    "CUTOFF": 1200,
+	                "REL_CUTOFF": 120
+                },
+                "QS":{
+                    "EPS_DEFAULT": 1.0E-12
+                      },
+                "SCF":{
+                    "SCF_GUESS" : "RESTART",
+                    "EPS_SCF": 1.0E-6,
+                    "MAX_SCF": 80,
+	"OT":{ "MINIMIZER": "DIIS",
+    	"PRECONDITIONER": "FULL_ALL",
+    	"ENERGY_GAP":0.01},
+	    "OUTER_SCF":{
+   	  "EPS_SCF": 1.0E-6,
+   	   "MAX_SCF": 2}
+                   },
+                "XC":{
+    "XC_FUNCTIONAL":{
+		 "_": "    ",
+		"LIBXC" :{
+		"FUNCTIONAL":[ " MGGA_X_SCAN "," MGGA_C_SCAN "]		
+                }
+           }}},
+            "SUBSYS":{
+                        "KIND":{
+                                "_": ["O", "Ti"],
+                                "POTENTIAL": ["GTH-PBE-q6", "GTH-PBE-q12"],
+                                "BASIS_SET": ["DZVP-MOLOPT-SR-GTH", "DZVP-MOLOPT-SR-GTH"]
+                        }
+            }
+        }
+    }}}                                                                                                                                                                                  
